@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        const nums = [2, 7, 11, 15];
+        const target = 9;
+
+            function twoSum(nums, target) {
+                //Create a new object to store the numbers
+                const map = new Map();
+
+                for (let i = 0; i < nums.length; i++) {
+                    //Calc the complement (the number needed to store to reach the target sum)
+                    const complement = target - nums[1];
+
+                    if (map.has(complement)) {
+                    return [map.get(complement), i];
+                }
+                map.set(nums[i], i);
+                }
+                return [];
+
+            }
+
+            console.log(twoSum(nums, target));
+
+    </script>
+</body>
+</html>

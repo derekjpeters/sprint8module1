@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        
+        //Given the array of integers, find the contiguous subarray with the largest sum
+    
+    const nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+    console.log(nums.length);
+    //Expected output 6
+    //Expected output [4, -1, 2, 1]
+    
+    function maxSubArray (nums) {
+        let maxSoFar = nums[0];
+        let currentMax = nums[0];
+    
+        for (let i = 1; i <  nums.length; i++) {
+            // Either continue the current subarray or start a new one
+            currentMax = Math.max(nums[i], currentMax + nums[i]);
+            maxSoFar = Math.max(maxSoFar, currentMax);
+        }
+        
+        return maxSoFar
+        
+    };
+   
+    //Example usage
+  
+    //console.log(result.subarray);
+    
+   
+    </script>
+</body>
+</html>
