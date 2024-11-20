@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindromes & An</title>
+</head>
+<body>
+    <script>
+        function isValidPalindrome(str) {
+            // return str
+            //     .toLowerCase()//convert to lowercase
+            //     .replace(/[^a-z0-9]/g, '');
+
+          const normalizedStr = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+           //Reverse the normalized string
+           
+           const reverseStr = normalizedStr.split('').reverse().join(''); 
+
+           return normalizedStr === reverseStr;
+        }
+
+        console.log(isValidPalindrome("A man, a plan, a canal, Panama!"));
+        console.log(isValidPalindrome('Hello, World'))
+
+        function isNumberPalindrome(num) {
+            const str = num.toString();
+            const reverseNumStr = str.split('').reverse().join('');
+            return str === reverseNumStr;
+        }
+
+        console.log(isNumberPalindrome(123));
+        console.log(isNumberPalindrome(191));
+
+        function isAnagram(str1, str2) {
+            const normalize = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '').split('').sort().join('');
+            //Early exit, if the lengths are different then it cannot be an anagram
+            const normalizedStr1 = str1.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const normalizedStr2 = str2.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+            if (normalizedStr1.length !== normalizedStr2.length) {
+                return false;
+            }
+
+            //compare
+            return normalize(str1) === normalize(str2);
+        }
+        console.log(isAnagram("Triangle", "Integral"));
+        console.log(isAnagram('listen', 'silent'));
+        console.log(isAnagram('Test', 'taste'));
+
+        function arePalindromeAndAnagram(str1, str2) {
+            return isValidPalindrome(str1) && isValidPalindrome(str2) && isAnagram(str1, str2);
+            
+        }
+
+        console.log(arePalindromeAndAnagram('level', 'level'));
+        console.log(arePalindromeAndAnagram('hello', 'olleh'));
+
+    </script>
+</body>
+</html>
