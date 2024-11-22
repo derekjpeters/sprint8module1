@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fionacci(n, memo = {}) {
+            console.log(`Called fibanacci(${n})`);
+            //Base case of 1: If n is 0, the Fib number is 0
+            if (n <= 1) return n;
+            console.log(`Base case reached: fibonacci(${n} = ${n})`);
+            //Does the number already exite
+            if(n in memo) return memo[n];
+            //F(n)=F(n-1)+F(n-2)
+            console.log(`Calculating: fibonacci(${n-1}) + fibanacci(${n-2})`);
+            memo[n] = fionacci(n - 1, memo) + fionacci(n-2, memo);
+            console.log(`computed and stored: fibonacci(${n}) = ${memo[n]}`);
+            return memo[n];
+        }
+
+        console.log(fionacci(10));
+        // console.log(fionacci(8));
+        // console.log(fionacci(0));
+
+        function factorial (n, memo = {}) {
+            //Base Case
+            if (n === 0 || n === 1) {
+                console.log(`Base case reached: factorial(${n}) = 1`);
+                return 1;
+            }
+
+            //check if the result is already cached then display that result
+            if (n in memo) {
+                console.log(`Found memoized value: factorial(${n}) = ${memo[n]}`);
+                return memo[n];
+            }
+
+            //Recursive Case
+            console.log(`Calculating factorial(${n} * factorial(${n-1}))`);
+            memo[n] = n * factorial(n-1, memo);
+            console.log(`Computed and stored: factorial (${n}) = ${memo[n]}`)
+            return memo[n];
+        }
+
+        console.log("Result:", factorial(4));
+        console.log("Result:", factorial(5));
+        console.log("Result:", factorial(6));
+
+        function mostFreqWord(words, memo = {}) {
+            //Base case: If the list is empty, return null
+            if (words.length === 0) {
+                console.log("Base case reached: No words left to process");
+                return null;
+            }
+
+            //Take the first word
+            const word = words[0]
+
+            //If this word's freq is already calculated, we will want to reuse it
+            if (word in memo) {
+                console.log(`Memoized found for "${word}": ${memo[word]}`);
+            } else {
+                //Calculate the frequency of the word
+                memo[word] = words.filter(w => w === word).length;
+                console.log(`Calculated frequency for "${word}": ${memo[word]}`);
+            }
+
+            //Recursive call (some call it a case) to process the rest of the word list
+            const mostFreqInRest = mostFreqWord(words.slice(1), memo);
+
+            //compare the frequence of the current word with the most frequent in the rest var
+            if(!mostFreqInRest || memo[word] > memo[mostFreqInRest]){
+                console.log(`"${word}" is the cureent most frequent.`);
+                return word;
+            } else {
+                console.log(`"${mostFreqInRest}" remains the most frequent`)
+                return mostFreqInRest;
+            }
+                     
+        }
+
+        //Test this function
+        const wordList = ["apple", "banana", "cherry", "date", "apple", "banana", "elderberry", "fig", "grape", "apple"];
+
+        console.log("Most Frequent Word:", mostFreqWord(wordList));
+
+
+    </script>
+</body>
+</html>
